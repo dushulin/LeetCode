@@ -1,0 +1,6 @@
+.idea
+.vscode
+build
+install
+cmake-build-debug
+leetcode/*
