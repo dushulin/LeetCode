@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/LeetCode_dsl.dir/d3_HashTable/[1]两数之和.cpp.o"
-  "CMakeFiles/LeetCode_dsl.dir/main.cpp.o"
   "LeetCode_dsl"
   "LeetCode_dsl.pdb"
 )

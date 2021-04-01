@@ -5,7 +5,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/coderlin/MyProject/LeetCode-dsl/d3_HashTable/[1]两数之和.cpp" "/Users/coderlin/MyProject/LeetCode-dsl/cmake-build-debug/CMakeFiles/LeetCode_dsl.dir/d3_HashTable/[1]两数之和.cpp.o"
-  "/Users/coderlin/MyProject/LeetCode-dsl/main.cpp" "/Users/coderlin/MyProject/LeetCode-dsl/cmake-build-debug/CMakeFiles/LeetCode_dsl.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

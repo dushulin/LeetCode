@@ -89,9 +89,6 @@
 		<Unit filename="/Users/coderlin/MyProject/LeetCode-dsl/d3_HashTable/[1]两数之和.cpp">
 			<Option target="LeetCode_dsl"/>
 		</Unit>
-		<Unit filename="/Users/coderlin/MyProject/LeetCode-dsl/main.cpp">
-			<Option target="LeetCode_dsl"/>
-		</Unit>
 		<Unit filename="/Users/coderlin/MyProject/LeetCode-dsl/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
