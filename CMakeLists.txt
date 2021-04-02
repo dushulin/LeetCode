@@ -3,4 +3,4 @@ project(LeetCode_dsl)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(LeetCode_dsl d3_HashTable/[1]两数之和.cpp)
+add_executable(LeetCode_dsl d3_HashTable/[1]两数之和.cpp d6_stack&queue/[347]前K个高频元素.cpp)

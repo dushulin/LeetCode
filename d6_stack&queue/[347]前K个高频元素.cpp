@@ -28,10 +28,25 @@
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
+#include <iostream>
+#include <vector>
+using namespace std;
+
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
-
+        return vector<int>({1, 2});
     }
 };
+
+int main(){
+    int a[] = {1,1,1,2,2,3};
+    vector<int> cost(a, a + sizeof(a) / sizeof(int));
+    int k = 2;
+    Solution solution;
+    vector<int> ans = solution.topKFrequent(cost, k);
+    for (int an : ans) {
+        cout <<  an << "";
+    }
+}
 //leetcode submit region end(Prohibit modification and deletion)
