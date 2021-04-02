@@ -30,23 +30,58 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 #include <iostream>
 #include <vector>
+#include <map>
+#include <queue>
 using namespace std;
 
 class Solution {
 public:
+    //小根堆
+    class myCompare {
+    public:
+        bool operator() (const pair<int, int>& lhs, const pair<int, int>& rhs){
+            return lhs.second > rhs.second;
+        }
+    };
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        return vector<int>({1, 2});
+        //1. 计算每个元素出现的频率，放入map中
+        map<int, int> numsMap;
+        for (int i = 0; i < nums.size(); ++i) {
+            if (numsMap.find(nums[i]) != numsMap.end()){
+                numsMap[nums[i]]++;
+            }else{
+                numsMap.insert(pair<int, int>(nums[i], 1));
+            }
+        }
+
+        //2. 将map中的元素放入容量为k的小根堆中
+        priority_queue<pair<int, int>, vector<pair<int, int> >, myCompare> priorityQueue;
+        for (auto & iter : numsMap){
+            priorityQueue.push(iter);
+            if (priorityQueue.size() > k){
+                //容量超过k，则弹出堆顶最小元素
+                priorityQueue.pop();
+            }
+        }
+
+        //3. 输出最大的k个元素。此时堆顶的倒数第k大的元素，所以倒序输出
+        vector<int> ans(k);
+        for (int i = k - 1; i >= 0; i--) {
+            ans[i] = priorityQueue.top().first;
+            priorityQueue.pop();
+        }
+        return ans;
     }
 };
 
 int main(){
     int a[] = {1,1,1,2,2,3};
-    vector<int> cost(a, a + sizeof(a) / sizeof(int));
+    vector<int> nums(a, a + sizeof(a) / sizeof(int));
     int k = 2;
     Solution solution;
-    vector<int> ans = solution.topKFrequent(cost, k);
+    vector<int> ans = solution.topKFrequent(nums, k);
     for (int an : ans) {
-        cout <<  an << "";
+        cout <<  an << " ";
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
