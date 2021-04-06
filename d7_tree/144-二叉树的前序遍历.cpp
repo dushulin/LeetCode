@@ -67,6 +67,7 @@
  */
 #include <iostream>
 #include <vector>
+#include <stack>
 
 using namespace std;
 struct TreeNode {
@@ -78,7 +79,21 @@ struct TreeNode {
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
-        return vector<int>({1,2});
+        stack<TreeNode*> st;
+        vector<int> result;
+        st.push(root);
+        while (!st.empty()){
+            TreeNode* node = st.top();
+            st.pop();
+            if (node != NULL){
+                result.push_back(node->val);
+            } else{
+                continue;
+            }
+            st.push(node->right);
+            st.push(node->left);
+        }
+        return result;
     }
 };
 

@@ -65,10 +65,39 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+#include <iostream>
+#include <vector>
+#include <stack>
+
+using namespace std;
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-
+        stack<TreeNode*> st;
+        vector<int> result;
+        TreeNode* cur = root;
+        while (cur != NULL || !st.empty()){
+            if (cur != NULL){//当前访问指针还没有找到最底层的左节点
+                st.push(cur);//保存访问指针走过的路径，因为后面需要按照这个路径去访问
+                cur = cur->left;//左
+            } else{//已经访问到最底层的左节点了。当前cur指针是最底层左节点的左孩子（即NULL）
+                cur = st.top();
+                st.pop();
+                result.push_back(cur->val);//中
+                cur = cur->right;//右
+            }
+        }
+        return result;
     }
 };
+
+int main(){
+
+}
 //leetcode submit region end(Prohibit modification and deletion)
