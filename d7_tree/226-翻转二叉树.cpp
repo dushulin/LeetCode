@@ -39,6 +39,8 @@
  * };
  */
 #include <iostream>
+#include <stack>
+#include <queue>
 
 using namespace std;
 
@@ -70,7 +72,20 @@ public:
      * @return
      */
     TreeNode* invertTree2(TreeNode* root) {
-
+        if (root == NULL)
+            return root;
+        stack<TreeNode*> stack;
+        stack.push(root);
+        while (!stack.empty()){
+            TreeNode* node = stack.top();
+            stack.pop();
+            swap(node->right, node->left);//交换左右节点
+            if (node->right != NULL)
+                stack.push(node->right);
+            if (node->left != NULL)
+                stack.push(node->left);
+        }
+        return root;
     }
 
     /**
@@ -79,7 +94,20 @@ public:
      * @return
      */
     TreeNode* invertTree3(TreeNode* root) {
-
+        if (root == NULL)
+            return root;
+        queue<TreeNode*> queue;
+        queue.push(root);
+        while (!queue.empty()){
+            TreeNode* node = queue.front();
+            queue.pop();
+            swap(node->right, node->left);
+            if (node->left != NULL)
+                queue.push(node->left);
+            if (node->right != NULL)
+                queue.push(node->right);
+        }
+        return root;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
