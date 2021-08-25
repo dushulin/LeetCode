@@ -83,9 +83,9 @@ public:
         if (node == NULL){
             return ;
         }
-        transal(node->left, vec);
-        vec.push_back(node->val);
-        transal(node->right, vec);
+        transal(node->left, vec);//左
+        vec.push_back(node->val);//中
+        transal(node->right, vec);//右
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
