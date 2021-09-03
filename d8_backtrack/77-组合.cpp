@@ -63,5 +63,26 @@ public:
             onePath.pop_back();
         }
     }
+
+    /**
+     * 剪枝
+     * 核心思想：如果[startIndex, n]包含的元素个数已经不足需要的元素个数了，则不需要迭代，直接返回
+     *          即，遍历的起始点startIndex最多在 n - (k - path.size()) + 1处
+     * @param n
+     * @param k
+     * @param startIndex
+     */
+    void backTracing1(int n, int k, int startIndex){
+        if (onePath.size() == k){
+            result.push_back(onePath);
+            return;
+        }
+
+        for (int i = startIndex; i <= n - (k - onePath.size()) + 1; ++i) {
+            onePath.push_back(i);
+            backTracking(n, k , i + 1);
+            onePath.pop_back();
+        }
+    }
 };
 //leetcode submit region end(Prohibit modification and deletion)
