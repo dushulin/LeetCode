@@ -56,7 +56,7 @@ public:
 
 int main(){
     Solution s;
-    cout << s.combinationSum3(3, 7).size();
+    cout << s.combinationSum3(3, 7).size() << endl;
 
 }
 
