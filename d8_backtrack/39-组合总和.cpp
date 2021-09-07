@@ -101,8 +101,14 @@ public:
 int main(){
     Solution s;
     vector<int> v = {1};
-    int target = 1;
-    cout << s.combinationSum(v, target).size();
+    int target = 2;
+    vector<vector<int>> r = s.combinationSum(v, target);
+    for (int i = 0; i < r.size(); ++i) {
+        for (int j = 0; j < r[i].size(); ++j) {
+            cout << r[i][j] << ", ";
+        }
+        cout << endl;
+    }
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
