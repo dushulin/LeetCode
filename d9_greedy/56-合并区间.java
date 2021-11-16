@@ -1,74 +1,72 @@
-//以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。请你合并所有重叠的区间，并返
-//回一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间。
+//给定一个非负整数 N，找出小于或等于 N 的最大的整数，同时这个整数需要满足其各个位数上的数字是单调递增。
+//
+// （当且仅当每个相邻位数上的数字 x 和 y 满足 x <= y 时，我们称这个整数是单调递增的。）
+//
+// 示例 1:
+//
+// 输入: N = 10
+//输出: 9
 //
 //
+// 示例 2:
 //
-// 示例 1：
-//
-//
-//输入：intervals = [[1,3],[2,6],[8,10],[15,18]]
-//输出：[[1,6],[8,10],[15,18]]
-//解释：区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].
+// 输入: N = 1234
+//输出: 1234
 //
 //
-// 示例 2：
+// 示例 3:
+//
+// 输入: N = 332
+//输出: 299
 //
 //
-//输入：intervals = [[1,4],[4,5]]
-//输出：[[1,5]]
-//解释：区间 [1,4] 和 [4,5] 可被视为重叠区间。
-//
-//
-//
-// 提示：
-//
-//
-// 1 <= intervals.length <= 104
-// intervals[i].length == 2
-// 0 <= starti <= endi <= 104
-//
-// Related Topics 数组 排序
-// 👍 1170 👎 0
+// 说明: N 是在 [0, 10^9] 范围内的一个整数。
+// Related Topics 贪心 数学
+// 👍 210 👎 0
 
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int[][] merge(int[][] intervals) {
-        if (intervals.length == 1)
-            return intervals;
-        int[][] result = new int[intervals.length][2];
-        Arrays.sort(intervals, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return Integer.compare(o1[0], o2[0]);
-            }
-        });
-        System.out.println(Arrays.deepToString(intervals));
-        int count = 0;
-        result[0][0] = intervals[0][0];
-        for (int i = 1; i < intervals.length; i++){
-            if (intervals[i][0] <= intervals[i - 1][1]){
-                //有重叠，merge
-                intervals[i][1] = Math.max(intervals[i][1], intervals[i - 1][1]);
-            }else {
-                //没有重叠，填充result
-                result[count][1] = intervals[i - 1][1];
-                result[count + 1][0] = intervals[i][0];
-                count++;
+    //本题使用数学运算的方法
+    //也可以将int n转化为char数组来做，更加直观
+    //贪心法：从后往前遍历，若后一个比前一个小，则将后一个变为9，前一个减一。
+    public int monotoneIncreasingDigits(int n) {
+        int result = 0;
+        List<Integer> nList = new ArrayList<>();
+        while (n != 0){
+            nList.add(n % 10);//nList是倒序的[2,3,3]    原数332
+            n = n / 10;
+        }
+        int flag = -1;//标识从哪一位开始变9
+        for (int i = 0; i < nList.size() - 1; i++) {
+            if (nList.get(i) < nList.get(i + 1)){
+                flag = i;
+                nList.set(i + 1, nList.get(i + 1) - 1);
             }
         }
-        result[count][1] = intervals[intervals.length - 1][1];
-        return Arrays.copyOf(result, count + 1);
+        for (int i = 0; i < nList.size(); i++){
+            if (flag == -1 || i > flag){//flag == -1表明n本来就是递增的；i > flag的数字不需要变为9
+                result += Math.pow(10, i) * nList.get(i);
+            }else {
+                result += Math.pow(10, i) * 9;
+            }
+        }
+        return result;
     }
+
 
     public static void main(String[] args) {
         Solution s = new Solution();
-        int[][] intervals = {{1,4},{4,5}};
-        System.out.println(Arrays.deepToString(s.merge(intervals)));
+        System.out.println(s.monotoneIncreasingDigits(10));
+        System.out.println();
+        System.out.println(s.monotoneIncreasingDigits(1234));
+        System.out.println();
+        System.out.println(s.monotoneIncreasingDigits(332));
+        System.out.println();
+        System.out.println(s.monotoneIncreasingDigits(100));
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
