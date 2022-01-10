@@ -30,7 +30,9 @@ class Solution {
         //              一个是取dp[j - weight[i]] + value[i]，即放物品i，指定是取最大的，由于是求最大价值
         //              因此，dp[j] = max(dp[j], dp[j - weight[i]] + value[i])
 
-        //4. 遍历顺序：倒序遍历。且先遍历物品i，再遍历背包容量j。倒序。首先正序遍历，可能会导致一个物品被放多次。其次先遍历背包再遍历物品，会导致背包里只被放入一个物品。
+        //4. 遍历顺序：倒序遍历。且先遍历物品i，再遍历背包容量j。倒序。
+            //首先正序遍历，可能会导致一个物品被放多次。
+            //其次先遍历背包再遍历物品，会导致背包里只被放入一个物品。
         for (int i = 0; i < weight.length; i++){
             for (int j = W; j >= weight[i]; j--){
                 dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);
