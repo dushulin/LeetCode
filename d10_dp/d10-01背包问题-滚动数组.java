@@ -5,7 +5,7 @@ class Solution {
     /**
      * 01背包：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。每件物品只能用一次，求解将哪些物品装入背包里物品价值总和最大
      *
-     * 一维滚动数组解法
+     * 一维滚动数组解法：先物再包，先正后倒 ==> 物包正倒 ==> 误报正道
      *
      * N = 3, W = 4
      *       重量   价值
@@ -33,8 +33,8 @@ class Solution {
         //4. 遍历顺序：倒序遍历。且先遍历物品i，再遍历背包容量j。倒序。
             //首先正序遍历，可能会导致一个物品被放多次。
             //其次先遍历背包再遍历物品，会导致背包里只被放入一个物品。
-        for (int i = 0; i < weight.length; i++){
-            for (int j = W; j >= weight[i]; j--){
+        for (int i = 0; i < weight.length; i++){//遍历物品：weight[0], weight[1], weight[2]
+            for (int j = W; j >= weight[i]; j--){//遍历背包：dp[4], dp[3], dp[2], dp[1], dp[0]。但是要注意下限，因为后面有个j - weight[i] 必须大于等于0。可理解为背包至少要比当前正在尝试装入的这个物品要大。
                 dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);
                 System.out.println("dp[" + j + "] = " + dp[j]);
             }
