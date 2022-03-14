@@ -39,5 +39,26 @@ class Solution {
         }
         return dp[n];
     }
+
+
+    //一般化题目：一共n级台阶，每次可以爬1级、2级、3级、m级台阶，问有多少种方法可以爬到顶端
+    //可转换为完全背包：类比377。可以爬的台阶数就是物品重量，台阶总数就是背包可装的总重量。求的是排列总和，且物品无限（可每次都跳一个台阶）
+    public int climbStairs1(int n, int m) {
+            //1. 确定dp含义: 爬i级台阶，的方法总数
+            int[] dp = new int[n + 1];
+            //2. 确定递推公式: dp[i] += dp[i - j]
+            //3. 初始化dp数组
+            dp[0] = 1;
+            //4. 确定遍历顺序：完全背包的排列总和，先背包、再物品
+            for (int i = 1; i <= n; i++){
+                for (int j = 1; j <= m; j++){
+                    //这里j从1开始，到m结束，表示物品从1开始到m结束
+                    if (i >= j) {
+                        dp[i] += dp[i - j];
+                    }
+                }
+            }
+            return dp[n];
+    }
 }
 //leetcode submit region end(Prohibit modification and deletion)
